@@ -1,0 +1,15 @@
+{
+  "name": "api-nosql/trabalho6",
+  "description": "Api T6-BD",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Matheus Silvestre",
+      "email": "matheussilvestre3@edu.univali.br"
+    }
+  ],
+  "require": {
+    "slim/slim": "4.10.*"
+  } 
+}

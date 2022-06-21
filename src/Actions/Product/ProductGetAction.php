@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class ProductGetAction
 {
+    private int $statusCode = 200;
     private ProductService $service;
 
     public function __construct()
@@ -24,13 +25,19 @@ class ProductGetAction
     {
         $id = $request->getQueryParams()['id'] ?? '';
 
-        $list = $this->service->list();
-
         if (!empty($id)) {
-            //Read no registro específico
+            $result = $this->service->read($id);
+        } else {
+            $result = $this->service->list();
         }
 
-        //Listar todos os registros
-        return $response;
+        if (empty($result)) {
+            $this->statusCode = 404;
+            $result = ['message' => 'Nenhum resultado encontrado.'];
+        }
+
+        $response->getBody()->write(json_encode($result));
+
+        return $response->withStatus($this->statusCode);
     }
 }

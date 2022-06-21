@@ -13,7 +13,7 @@ return function (App $app) {
         $products->get('', ProductGetAction::class);
         $products->post('', ProductSaveAction::class);
 
-        $products->group('/{product}', function (RouteCollectorProxy $product) {
+        $products->group('/{id}', function (RouteCollectorProxy $product) {
             $product->get('', ProductGetAction::class);
             $product->put('', ProductSaveAction::class);
             $product->delete('', ProductDeleteAction::class);

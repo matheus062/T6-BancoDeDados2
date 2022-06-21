@@ -2,38 +2,33 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Product;
+namespace App\Actions;
 
-use App\Domain\Service\ProductService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class ProductGetAction
+class GetAction
 {
     private int $statusCode = 200;
-    private ProductService $service;
-
-    public function __construct()
-    {
-        $this->service = new ProductService();
-    }
 
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface      $response
     ): ResponseInterface
     {
-        $id = $request->getQueryParams()['id'] ?? '';
+        $serviceClass = $request->getAttribute('serviceClass');
+        $service = new $serviceClass();
+        $id = $request->getAttribute('id') ?? '';
 
         if (!empty($id)) {
-            $result = $this->service->read($id);
+            $result = $service->read($id);
         } else {
-            $result = $this->service->list();
+            $result = $service->list();
         }
 
         if (empty($result)) {
             $this->statusCode = 404;
-            $result = ['message' => 'Nenhum resultado encontrado.'];
+            $result = ['message' => 'Nenhum registro encontrado.'];
         }
 
         $response->getBody()->write(json_encode($result));

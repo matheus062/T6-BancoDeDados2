@@ -2,34 +2,29 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Product;
+namespace App\Actions;
 
-use App\Domain\Service\ProductService;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class ProductSaveAction
+class SaveAction
 {
     private int $statusCode = 201;
-    private ProductService $service;
-
-    public function __construct()
-    {
-        $this->service = new ProductService();
-    }
 
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface      $response
     ): ResponseInterface
     {
-        $id = $request->getAttributes()['id'] ?? '';
+        $serviceClass = $request->getAttribute('serviceClass');
+        $service = new $serviceClass();
+        $id = $request->getAttribute('id') ?? '';
         $data = json_decode($request->getBody()->getContents(), true);
 
         if (!empty($id)) {
-            $result = $this->service->update($id, $data);
+            $result = $service->update($id, $data);
         } else {
-            $result = $this->service->create($data);
+            $result = $service->create($data);
         }
 
         if (empty($result)) {

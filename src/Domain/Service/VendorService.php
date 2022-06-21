@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Domain\Service;
+namespace App\Domain\Service;
 
-class VendorService
+class VendorService extends AbstractService
 {
-
+    public function __construct()
+    {
+        parent::__construct('vendors');
+        $this->requiredFields = ['name', 'phone', 'email', 'taxId'];
+    }
 
 }

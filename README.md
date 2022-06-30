@@ -7,7 +7,20 @@ no curso de Ciências da Computação na Universidade do Vale de Itajaí.
 
 ### Escopo
 
+Uma API para integração de sistemas WEB, com foco na facilidade de implementação no cadastro de entidades utilizando
+banco de dados não-relacional.
+
 ### Formulação do problema
+
+Atualmente nossos clientes tem dificuldades em cadastrar novos produtos ou fornecedores, devido cada entidade em si,
+possuir particularidades, ou seja, características diferentes entre si. Além disso, possui clientes com diversos campos
+a mais do que
+um cadastro normal e dificuldade na implementação de novos atributos e/ou novas entidades no sistema.
+
+Sendo assim, com esse problema em vista, nosso cliente acabou tendo dificuldades utilizando outras API´s que manipulam
+banco
+de dados relacionais, devido as tabelas possuírem campos fixos, pré-estabelecidos previamente na criação do mesmo.
+Utilizando, um banco de dados não-relacional, a flexibilidade do nosso cliente estará aumentada.
 
 ### Solução proposta
 

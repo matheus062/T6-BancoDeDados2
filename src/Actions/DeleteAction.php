@@ -36,7 +36,9 @@ class DeleteAction
 
         $response->getBody()->write(json_encode($result));
 
-        return $response->withStatus($this->statusCode);
+        return $response
+            ->withStatus($this->statusCode)
+            ->withHeader('Content-Type', 'application/json');
     }
 
 }
